@@ -100,7 +100,7 @@ export const Hero = () => {
                 <a href="#contact" className="px-6 py-3 rounded-full border border-purple-500/50 hover:bg-purple-500/10 text-foreground font-medium transition-all hover:-translate-y-1">
                   Get In Touch
                 </a>
-                <a href="#" className="px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 text-foreground font-medium border border-white/10 transition-all hover:-translate-y-1">
+                <a href="https://drive.google.com/file/d/1jB5eJ1syzSxKlUqj4l2eXoxWHCHGHik8/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="px-6 py-3 rounded-full bg-white/5 hover:bg-white/10 text-foreground font-medium border border-white/10 transition-all hover:-translate-y-1">
                   Download Resume
                 </a>
               </motion.div>
