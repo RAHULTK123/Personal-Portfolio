@@ -2,15 +2,18 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, Linkedin, Github, Send, CheckCircle2 } from "lucide-react";
+import { Phone, Mail, Linkedin, Github, Send, CheckCircle2, AlertCircle } from "lucide-react";
 
 export const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setIsError(false);
+    setIsSubmitted(false);
     
     const form = e.currentTarget;
     const formData = new FormData(form);
@@ -26,6 +29,8 @@ export const Contact = () => {
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch (error) {
       console.error("Form submission error", error);
+      setIsError(true);
+      setTimeout(() => setIsError(false), 6000);
     } finally {
       setIsSubmitting(false);
     }
@@ -178,6 +183,28 @@ export const Contact = () => {
                   placeholder="Hello Rahul, I'd like to discuss a project..."
                 />
               </div>
+
+              {isSubmitted && (
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 flex items-start gap-3"
+                >
+                  <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" />
+                  <p className="text-sm font-medium">Thank you! Your message has been sent successfully. I'll get back to you soon.</p>
+                </motion.div>
+              )}
+              
+              {isError && (
+                <motion.div 
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 flex items-start gap-3"
+                >
+                  <AlertCircle className="w-5 h-5 shrink-0 mt-0.5" />
+                  <p className="text-sm font-medium">Oops! Something went wrong. Please try again later or contact me directly via email.</p>
+                </motion.div>
+              )}
 
               <button
                 type="submit"
